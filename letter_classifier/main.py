@@ -24,7 +24,7 @@ def run_cnn() -> None:
     train_loader = DataLoader(train_set, batch_size=64, shuffle=True)
     val_loader = DataLoader(val_set, batch_size=64)
     model = CNNClassifier()
-    train_torch(model, train_loader, device, epochs=5)  
+    train_torch(model, train_loader, val_loader, device, epochs=5)  
     y_true, y_pred = evaluate_torch(model, val_loader, device)  
     evaluate_model(y_true, y_pred, model_name="CNN (PyTorch)")
 
