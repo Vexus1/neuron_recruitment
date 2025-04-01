@@ -1,6 +1,24 @@
 import pandas as pd
 from numpy import ndarray
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+import torch
+from torch.utils.data import Dataset
+
+class MLPDataset(Dataset):
+    def __init__(self, csv_path: str, blink_flag: bool = False):
+        X_train, _, y_train, _ = parse_data(csv_path, blink_flag=blink_flag)
+        scaler = StandardScaler()
+        X_scaled = scaler.fit_transform(X_train)
+        self.X = torch.tensor(X_scaled, dtype=torch.float32)
+        self.y = torch.tensor(y_train.astype(int), dtype=torch.long)
+
+    def __len__(self):
+        return len(self.y)
+    
+    def __getitem__(self, idx: int):
+        return self.X[idx], self.y[idx]
+
 
 def parse_data(csv_path: str, 
                blink_flag: bool = False) -> tuple[ndarray, ndarray, ndarray, ndarray]:
