@@ -37,4 +37,4 @@ if __name__ == '__main__':
     run_rf(CSV_PATH, blink_flag=False)
     run_rf(CSV_PATH, blink_flag=True)
     run_mlp(CSV_PATH, blink_flag=False)
-    run_mlp(CSV_PATH, blink_flag=True)
+    # run_mlp(CSV_PATH, blink_flag=True)
